@@ -1,13 +1,39 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [FormsModule, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'task-manager';
+  title = 'Task Manager';
+  newTask: string = '';
+  tasks: { text: string; completed: boolean }[] = [];
+  isDropdownOpen = false;
+
+  addTask(): void {
+    const trimmed = this.newTask.trim();
+    if (!trimmed) {
+      alert('Please enter a task');
+      return;
+    }
+    this.tasks.push({ text: trimmed, completed: false });
+    this.newTask = '';
+  }
+
+  deleteTask(index: number): void {
+    this.tasks.splice(index, 1);
+  }
+
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  toggleComplete(task: { text: string; completed: boolean }): void {
+    task.completed = !task.completed;
+  }
 }

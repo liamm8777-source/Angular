@@ -1,8 +1,12 @@
-import { ApplicationConfig } from '@angular/core';
+// app.config.ts
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
-import { routes } from './app.routes';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes)]
+  providers: [
+    provideRouter([]),
+    importProvidersFrom(BrowserModule, FormsModule), // ✅ add FormsModule here
+  ],
 };

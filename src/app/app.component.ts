@@ -28,7 +28,7 @@ export class AppComponent {
   startDebate(): void {
     const subject = this.topic.trim();
 
-    if (!subject) {
+    if (!this.isValidTopic(subject)) {
       this.errorMessage = 'Please enter a topic to debate.';
       this.resetDebate();
       return;
@@ -38,6 +38,10 @@ export class AppComponent {
     this.isDebating = true;
     this.messages = this.createDebate(subject);
     this.verdict = this.createVerdict(subject);
+  }
+
+  private isValidTopic(topic: string): boolean {
+    return !!topic;
   }
 
   private resetDebate(): void {
@@ -53,22 +57,22 @@ export class AppComponent {
       {
         speaker: 'Bot Atlas',
         role: 'pro',
-        content: `I’ll champion a structured plan for ${focus}: clarify the audience, set performance targets, and choose a rendering stack early to avoid rework.`,
+        content: `I’ll champion a structured plan for ${focus}: clarify the audience, set success criteria, and define milestones so we keep momentum.`,
       },
       {
         speaker: 'Bot Echo',
         role: 'con',
-        content: `I’ll pressure-test that. Before picking tools, we need rapid prototypes to validate fun and feel. Over-planning can stall progress on ${focus}.`,
+        content: `I’ll pressure-test that. Before locking plans, we need quick experiments to surface unknowns. Over-planning can stall progress on ${focus}.`,
       },
       {
         speaker: 'Bot Atlas',
         role: 'pro',
-        content: `Fair push. We can balance both by selecting a Python-friendly engine like Godot or Panda3D, then establishing modules for assets, physics, and AI loops.`,
+        content: `Fair push. We can balance both by choosing a lean toolkit, documenting decisions, and keeping workstreams modular so changes stay safe.`,
       },
       {
         speaker: 'Bot Echo',
         role: 'con',
-        content: `Prototype loops should ship weekly. Use tight CI, scene prefabs, and telemetry to measure frame times and player flow for ${focus}.`,
+        content: `Prototype loops should ship weekly. Use tight feedback cycles, small reviews, and lightweight telemetry to keep ${focus} aligned.`,
       },
     ];
   }
@@ -76,7 +80,7 @@ export class AppComponent {
   private createVerdict(topic: string): string {
     const focus = this.emphasize(topic);
 
-    return `Blend both strategies for ${focus}: prototype fast to test feel, but stabilize around a documented engine setup (rendering, physics, asset pipeline) with automated checks so improvements are measurable and reversible.`;
+    return `Blend both strategies for ${focus}: prototype fast to learn, but stabilize around a simple, documented plan with automated checks so improvements stay measurable and reversible.`;
   }
 
   private emphasize(text: string): string {

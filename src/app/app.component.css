@@ -1,132 +1,208 @@
-/* General body style */
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f6f8;
-  color: #333;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-}
-
-/* Container for the app */
 :host {
   display: block;
-  max-width: 500px;
-  width: 90%;
-  margin: 50px auto;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  padding: 30px;
+  min-height: 100vh;
+  padding: 32px 16px 64px;
+  background: radial-gradient(circle at 20% 20%, #eef2ff, transparent 35%),
+    radial-gradient(circle at 80% 0%, #e0f7ff, transparent 30%),
+    #0f172a;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: #0f172a;
 }
 
-/* App title */
+.shell {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.hero {
+  background: white;
+  border-radius: 20px;
+  padding: 28px 32px;
+  box-shadow: 0 12px 45px rgba(15, 23, 42, 0.15);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #6366f1;
+  margin: 0 0 6px;
+}
+
 h1 {
-  text-align: center;
-  color: #4a90e2;
-  margin-bottom: 20px;
-  font-size: 2rem;
+  margin: 0;
+  font-size: 2.2rem;
+  color: #0f172a;
 }
 
-/* Input field */
+.lede {
+  margin: 10px 0 0;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.panel {
+  margin-top: 22px;
+  background: white;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.field-label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 input[type="text"] {
-  width: calc(100% - 110px);
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  flex: 1 1 340px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
   font-size: 1rem;
-  transition: border-color 0.3s;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 input[type="text"]:focus {
-  outline: none;
-  border-color: #4a90e2;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
 }
 
-/* Add Task button */
 button {
-  padding: 12px 18px;
-  margin-left: 10px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  color: white;
   border: none;
-  background-color: #4a90e2;
-  color: #fff;
-  border-radius: 8px;
-  font-size: 1rem;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
 }
 
 button:hover {
-  background-color: #357ab8;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.3);
 }
 
-/* Task list */
-ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
+.hint {
+  margin: 10px 0 0;
+  color: #6b7280;
 }
 
-li {
-  background-color: #f0f4f8;
-  margin-bottom: 10px;
-  padding: 12px 15px;
-  border-radius: 8px;
+.error {
+  color: #dc2626;
+  font-weight: 600;
+  margin: 8px 0 0;
+}
+
+.debate {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.message {
+  background: white;
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.message-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  transition: background-color 0.3s;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #111827;
+  font-weight: 700;
 }
 
-li:hover {
-  background-color: #e1e8f0;
+.speaker {
+  color: #0f172a;
 }
 
-/* Task text */
-li span {
-  flex: 1;
-}
-
-/* Delete button inside task */
-li button {
-  background-color: #ff5c5c;
+.badge {
   padding: 6px 10px;
-  font-size: 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: #e2e8f0;
+  color: #0f172a;
 }
 
-li button:hover {
-  background-color: #e04e4e;
+.badge.pro {
+  background: rgba(22, 163, 74, 0.12);
+  color: #166534;
 }
 
-/* Completed task */
-.completed span {
-  text-decoration: line-through;
-  color: #999;
-  font-style: italic;
+.badge.con {
+  background: rgba(219, 39, 119, 0.12);
+  color: #be185d;
 }
 
-/* Responsive */
-@media (max-width: 500px) {
-  input[type="text"] {
-    width: 100%;
-    margin-bottom: 10px;
+.message.pro {
+  border-left: 4px solid #16a34a;
+}
+
+.message.con {
+  border-left: 4px solid #db2777;
+}
+
+.message p {
+  margin: 0;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.verdict {
+  margin-top: 22px;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
+}
+
+.verdict h2 {
+  margin: 0 0 10px;
+  color: #c7d2fe;
+}
+
+.verdict p {
+  margin: 0;
+  line-height: 1.7;
+}
+
+@media (max-width: 820px) {
+  .debate {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   button {
     width: 100%;
-    margin-left: 0;
-  }
-
-  li {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  li button {
-    margin-top: 5px;
+    text-align: center;
   }
 }

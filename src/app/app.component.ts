@@ -41,7 +41,7 @@ export class AppComponent {
   }
 
   private isValidTopic(topic: string): boolean {
-    return !!topic.trim();
+    return !!topic;
   }
 
   private resetDebate(): void {

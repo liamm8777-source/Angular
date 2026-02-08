@@ -26,6 +26,7 @@ describe('AppComponent', () => {
     expect(component.isDebating).toBeTrue();
     expect(component.messages.length).toBeGreaterThan(0);
     expect(component.verdict.toLowerCase()).toContain('python');
+    expect(component.verdict).toContain('Python 3d game');
   });
 
   it('clears debate when the topic is empty', () => {

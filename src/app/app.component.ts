@@ -1,6 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
+type DebateRole = 'pro' | 'con';
+
+interface DebateMessage {
+  speaker: string;
+  role: DebateRole;
+  content: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -10,30 +18,69 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Task Manager';
-  newTask: string = '';
-  tasks: { text: string; completed: boolean }[] = [];
-  isDropdownOpen = false;
+  title = 'AI Debate Arena';
+  topic = '';
+  errorMessage = '';
+  isDebating = false;
+  messages: DebateMessage[] = [];
+  verdict = '';
 
-  addTask(): void {
-    const trimmed = this.newTask.trim();
-    if (!trimmed) {
-      alert('Please enter a task');
+  startDebate(): void {
+    const subject = this.topic.trim();
+
+    if (!subject) {
+      this.errorMessage = 'Please enter a topic to debate.';
+      this.resetDebate();
       return;
     }
-    this.tasks.push({ text: trimmed, completed: false });
-    this.newTask = '';
+
+    this.errorMessage = '';
+    this.isDebating = true;
+    this.messages = this.createDebate(subject);
+    this.verdict = this.createVerdict(subject);
   }
 
-  deleteTask(index: number): void {
-    this.tasks.splice(index, 1);
+  private resetDebate(): void {
+    this.messages = [];
+    this.verdict = '';
+    this.isDebating = false;
   }
 
-  toggleDropdown(): void {
-    this.isDropdownOpen = !this.isDropdownOpen;
+  private createDebate(topic: string): DebateMessage[] {
+    const focus = this.emphasize(topic);
+
+    return [
+      {
+        speaker: 'Bot Atlas',
+        role: 'pro',
+        content: `I’ll champion a structured plan for ${focus}: clarify the audience, set performance targets, and choose a rendering stack early to avoid rework.`,
+      },
+      {
+        speaker: 'Bot Echo',
+        role: 'con',
+        content: `I’ll pressure-test that. Before picking tools, we need rapid prototypes to validate fun and feel. Over-planning can stall progress on ${focus}.`,
+      },
+      {
+        speaker: 'Bot Atlas',
+        role: 'pro',
+        content: `Fair push. We can balance both by selecting a Python-friendly engine like Godot or Panda3D, then establishing modules for assets, physics, and AI loops.`,
+      },
+      {
+        speaker: 'Bot Echo',
+        role: 'con',
+        content: `Prototype loops should ship weekly. Use tight CI, scene prefabs, and telemetry to measure frame times and player flow for ${focus}.`,
+      },
+    ];
   }
 
-  toggleComplete(task: { text: string; completed: boolean }): void {
-    task.completed = !task.completed;
+  private createVerdict(topic: string): string {
+    const focus = this.emphasize(topic);
+
+    return `Blend both strategies for ${focus}: prototype fast to test feel, but stabilize around a documented engine setup (rendering, physics, asset pipeline) with automated checks so improvements are measurable and reversible.`;
+  }
+
+  private emphasize(text: string): string {
+    const normalized = text.trim();
+    return normalized.charAt(0).toUpperCase() + normalized.slice(1);
   }
 }

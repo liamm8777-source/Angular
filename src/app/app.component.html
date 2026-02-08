@@ -1,22 +1,46 @@
-<h1>{{ title }}</h1>
+<main class="shell">
+  <header class="hero">
+    <p class="eyebrow">Dual-bot debate</p>
+    <h1>{{ title }}</h1>
+    <p class="lede">
+      Describe any topic and two specialized bots will argue the best approach
+      before producing a concise final result.
+    </p>
+  </header>
 
-<div class="task-input">
-  <input type="text" [(ngModel)]="newTask" placeholder="Enter a new task" />
-  <button (click)="addTask()">Add Task</button>
-</div>
+  <section class="panel">
+    <label class="field-label" for="topic">Debate topic</label>
+    <div class="input-row">
+      <input
+        id="topic"
+        type="text"
+        [(ngModel)]="topic"
+        placeholder="e.g., How to build the best Python 3D game"
+      />
+      <button type="button" (click)="startDebate()">Start debate</button>
+    </div>
+    <p class="hint">The bots exchange viewpoints, then synthesize a plan.</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </section>
 
-<div class="task-dropdown" [class.open]="tasks.length > 0">
-  <button class="dropdown-btn" (click)="toggleDropdown()">
-    Tasks ({{ tasks.length }}) ▼
-  </button>
-
-  <ul *ngIf="isDropdownOpen">
-    <li
-      *ngFor="let task of tasks; let i = index"
-      [class.completed]="task.completed"
+  <section class="debate" *ngIf="messages.length">
+    <div
+      class="message"
+      *ngFor="let message of messages"
+      [ngClass]="message.role"
     >
-      <span (click)="toggleComplete(task)">{{ task.text }}</span>
-      <button (click)="deleteTask(i)">Delete</button>
-    </li>
-  </ul>
-</div>
+      <div class="message-header">
+        <span class="badge" [ngClass]="message.role">
+          {{ message.role === 'pro' ? 'Proposer' : 'Challenger' }}
+        </span>
+        <span class="speaker">{{ message.speaker }}</span>
+      </div>
+      <p>{{ message.content }}</p>
+    </div>
+  </section>
+
+  <section class="verdict" *ngIf="verdict">
+    <h2>Final Result</h2>
+    <p>{{ verdict }}</p>
+  </section>
+</main>

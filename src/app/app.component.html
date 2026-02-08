@@ -31,7 +31,7 @@
     >
       <div class="message-header">
         <span class="badge" [ngClass]="message.role">
-          {{ message.role === 'pro' ? 'Proposer' : 'Challenger' }}
+          {{ getRoleLabel(message.role) }}
         </span>
         <span class="speaker">{{ message.speaker }}</span>
       </div>

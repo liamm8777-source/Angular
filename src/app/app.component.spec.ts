@@ -38,4 +38,13 @@ describe('AppComponent', () => {
     expect(component.verdict).toBe('');
     expect(component.errorMessage).toBeTruthy();
   });
+
+  it('capitalizes the topic in generated content', () => {
+    component.topic = 'space exploration';
+
+    component.startDebate();
+
+    expect(component.verdict).toContain('Space exploration');
+    expect(component.messages[0].content).toContain('Space exploration');
+  });
 });

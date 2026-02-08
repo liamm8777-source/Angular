@@ -41,7 +41,7 @@ export class AppComponent {
   }
 
   private isValidTopic(topic: string): boolean {
-    return !!topic;
+    return !!topic.trim();
   }
 
   private resetDebate(): void {
@@ -81,6 +81,10 @@ export class AppComponent {
     const focus = this.emphasize(topic);
 
     return `Blend both strategies for ${focus}: prototype fast to learn, but stabilize around a simple, documented plan with automated checks so improvements stay measurable and reversible.`;
+  }
+
+  getRoleLabel(role: DebateRole): string {
+    return role === 'pro' ? 'Proposer' : 'Challenger';
   }
 
   private emphasize(text: string): string {
